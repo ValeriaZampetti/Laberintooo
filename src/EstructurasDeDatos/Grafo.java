@@ -12,9 +12,65 @@ package EstructurasDeDatos;
 public class Grafo 
 {
     
-    //Lista de listas de adyacencia
+     //Lista de listas de adyacencia
 
-    public Lista<Lista<Vertice>> listaAdyacencia;
+    private Lista<Vertice> listaAdyacencia; // columnas
+    
+    //(vertices)-> (lista de aristas)
+    // 0        -> 0 - 1 - 2 - 3    
+    // 1        -> 0 - 1 - 2 - 3
+    // 2        -> 0 - 1 - 2 - 3
+    // 3        -> 0 - 1 - 2 - 3
+
+    private int numVertices;
+    
+    private int cantAristas;
+    
+    public Grafo()
+    {
+        this.numVertices = 0;
+    }
+    
+    public Grafo(int ancho, int largo)
+    {
+        this.numVertices = ancho;
+        this.cantAristas = largo;
+    }
+    
+    public void LoadLAdyacencia()
+    {
+        if (this.numVertices > 0 && this.cantAristas > 0) 
+        {
+            for (int i = 0; i < numVertices-1; i++)
+            {
+                Vertice aux = new Vertice(i); 
+
+                for (int j = 0; j < cantAristas; j++) 
+                {
+                    Nodo nodito = new Nodo(j);
+                    aux.getAristas().insertarUltimo(nodito);
+                    // lista de aristas (Nodo info: int) -> 0 - 1 - 2 - 3
+                }
+                
+                this.listaAdyacencia.insertarUltimo(aux);
+            }
+        }
+
+    }
+    public void AddEdge(Object infoAdd, Object infoSearch)
+    {
+        // necesito la coordena del vertice
+        // necesito la coordenada
+        // v -> 
+
+    }
+    
+    public void Prim(Grafo graf, int ancho, int largo)
+    {
+        // Primer paso - Agregar vertices a la lista (tantas veces como ancho)        
+    }
+    
+    
 
     /*public int numnodos;
     public int cantvertices;
@@ -96,7 +152,6 @@ public class Grafo
     }
    
     
-
         public void insertaVertice (int n) {
         if (n > numnodos - cantvertices){
             System.out.println ("Error, se supera el número de nodos máximo del grafo");
@@ -107,8 +162,6 @@ public class Grafo
            cantvertices += n;
          }
     }
-
-
     public void imprimirGrafo () {
         System.out.println("Tamaño máximo del grafo: " + numnodos + "\n");
         System.out.println("El grafo contiene " + cantvertices + " vértices: \n");
@@ -164,12 +217,10 @@ public class Grafo
         Cola cola = new Cola ();
         boolean visitados [ ] = new boolean [g.cantvertices]; 
         int v; //vértice actual
-
         //Se inicializa el vector visitados [] a false for (int i = 0; i < g.obtenerNumVertices (); i++)
         for (int i = 0; i < g.cantvertices; i++) {
             visitados[i] = false;
         }
-
         for (int i = 0; i < g.cantvertices; i++) {
             if (!visitados[i]) {
                 cola.Encolar(new Nodo(i));
@@ -210,6 +261,7 @@ public class Grafo
         
        
  */
+
 }
     
    
@@ -277,15 +329,7 @@ public class Grafo
     //otro metodo Generar entrada y salida i=0 o n  j=0 ó m genere numero random con libreria map random o random y alli llamaremos otro metodo llamado generar borde Generar borde() i=0; i=n o j=m if(hayentrada metodo nodo n=0 creamos arriba del for el nodo auxiliar else if(hay salida) n=1 suponiendo que n no es un objeto MODIFICAR EN STATE else n=2 si no es entrada ni salida 
     
     //INTERFAZ SE RECORRE LA MATRIZ Y YA
-    
-    
-    
-    
-    
-    
-    
-    
-    
+       
 
 //    
 //    private int[][] Adyacentes;
