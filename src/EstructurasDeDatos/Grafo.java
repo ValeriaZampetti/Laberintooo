@@ -41,7 +41,7 @@ public class Grafo
     {
         if (this.numVertices > 0 && this.cantAristas > 0) 
         {
-            for (int i = 0; i < numVertices-1; i++)
+            for (int i = 0; i < numVertices-1; i++) //por que restar -1
             {
                 Vertice aux = new Vertice(i); 
 
@@ -57,6 +57,8 @@ public class Grafo
         }
 
     }
+    
+    
     public void AddEdge(Object infoAdd, Object infoSearch)
     {
         // necesito la coordena del vertice
@@ -67,6 +69,7 @@ public class Grafo
     
     public void Prim(Grafo graf, int ancho, int largo)
     {
+        
         // Primer paso - Agregar vertices a la lista (tantas veces como ancho)        
     }
     

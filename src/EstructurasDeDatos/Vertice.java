@@ -13,6 +13,7 @@ public class Vertice<T>
 {
     private Lista <T> aristas; // filas
     private int id;
+    private Lista<T> muros;
     public Vertice()
     {
         this.aristas = new Lista();
@@ -31,6 +32,7 @@ public class Vertice<T>
     {
         this.id = id;
         this.aristas = new Lista();
+        this.muros= new Lista();
     }
     
     
