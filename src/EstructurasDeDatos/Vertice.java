@@ -11,31 +11,20 @@ package EstructurasDeDatos;
  */
 public class Vertice<T> 
 {
-    private Lista <T> aristas; // filas
+    private Lista<T> aristas; // columnas
+    private Muro muros; // muros de cada casilla del laberinto
     private int id;
-    private Lista<T> muros;
+    
     public Vertice()
     {
         this.aristas = new Lista();
-        // representar los 4 muros
-        
-        // -> deben ser metodos retornen booleano
-        
-        // -> // si el vertice es esquina tiene dos muros 
-        
-        // -> // si el vertice esta en un borde y no es esquina tiene 3 muros
-        
-        // -> // si el vertice no cumple una de las condiciones anteriores entonces tiene 4 muros
     }
     
     public Vertice(int id)
     {
         this.id = id;
         this.aristas = new Lista();
-        this.muros= new Lista();
     }
-    
-    
 
     /**
      * @return the aristas
@@ -49,6 +38,34 @@ public class Vertice<T>
      */
     public void setAristas(Lista<T> aristas) {
         this.aristas = aristas;
+    }
+
+    /**
+     * @return the muros
+     */
+    public Muro getMuros() {
+        return muros;
+    }
+
+    /**
+     * @param muros the muros to set
+     */
+    public void setMuros(Muro muros) {
+        this.muros = muros;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
     

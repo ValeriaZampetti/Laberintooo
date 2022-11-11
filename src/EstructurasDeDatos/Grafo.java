@@ -9,73 +9,119 @@ package EstructurasDeDatos;
  *
  * @author valeriazampetti
  */
-public class Grafo 
-{
-    
-     //Lista de listas de adyacencia
+public class Grafo {
 
-    private Lista<Vertice> listaAdyacencia; // columnas
-    
+    //Lista de listas de adyacencia
+    private Lista<Vertice> listaAdyacencia; // filas
+    // (Vertice, Vertice)
     //(vertices)-> (lista de aristas)
-    // 0        -> 0 - 1 - 2 - 3    
-    // 1        -> 0 - 1 - 2 - 3
-    // 2        -> 0 - 1 - 2 - 3
-    // 3        -> 0 - 1 - 2 - 3
-
+    // 0        -> (0,0) - (0,1) - (0,2) - (0,3)    
+    // 1        -> (1,0) - (1,1) - (1,2) - (1,3)    
+    // 2        -> (2,0) - (2,1) - (2,2) - (2,3)    
+    // 3        -> (3,0) - (3,1) - (3,2) - (3,3)    
     private int numVertices;
-    
+
     private int cantAristas;
-    
-    public Grafo()
-    {
+
+    public Grafo() {
         this.numVertices = 0;
     }
-    
-    public Grafo(int ancho, int largo)
-    {
+
+    public Grafo(int ancho, int largo) {
         this.numVertices = ancho;
         this.cantAristas = largo;
+        this.listaAdyacencia = new Lista();
     }
-    
-    public void LoadLAdyacencia()
-    {
-        if (this.numVertices > 0 && this.cantAristas > 0) 
-        {
-            for (int i = 0; i < numVertices-1; i++) //por que restar -1
-            {
-                Vertice aux = new Vertice(i); 
 
-                for (int j = 0; j < cantAristas; j++) 
-                {
-                    Nodo nodito = new Nodo(j);
-                    aux.getAristas().insertarUltimo(nodito);
-                    // lista de aristas (Nodo info: int) -> 0 - 1 - 2 - 3
+    public void Load() {
+        // representar los 4 muros
+
+        // -> deben ser metodos retornen booleano
+        // -> // si el vertice es esquina tiene dos muros  
+        //i -> filas j -> columnas
+        // (0,0) (i, 0) (0,j) (i,j)        
+        // -> // si el vertice esta en un borde y no es esquina tiene 3 muros
+        // -> // si el vertice no cumple una de las condiciones anteriores entonces tiene 4 muros
+        if (this.numVertices > 0 && this.cantAristas > 0) {
+            for (int i = 0; i <= numVertices-1; i++) {
+                Vertice fila = new Vertice(i);
+
+                for (int j = 0; j <= this.cantAristas-1; j++) {
+                    Vertice columna = new Vertice(j);
+
+                    // instancia de muros, inicializa con todos los muros
+                    Muro murito = new Muro();
+                    columna.setMuros(murito);
+                    var aux = fila.getAristas();
+                    aux.insertarUltimo(columna);
+                    fila.setAristas(aux);
                 }
                 
-                this.listaAdyacencia.insertarUltimo(aux);
+                this.listaAdyacencia.insertarUltimo(fila);
             }
         }
 
     }
-    
-    
-    public void AddEdge(Object infoAdd, Object infoSearch)
-    {
-        // necesito la coordena del vertice
-        // necesito la coordenada
-        // v -> 
 
+    public void LoadAdyacencia() {
+        int xArriba, yArriba, xAbajo, yAbajo, xDerecha, yDerecha, xIzquierda, yIzquierda = 0;
+        int i = 0;
+        int j = 0;
+        xArriba = i - 1;
+        yArriba = j;
+        xAbajo = i + 1;
+        yAbajo = j;
+        xDerecha = i;
+        yDerecha = j + 1;
+        xIzquierda = i;
+        yIzquierda = j - 1;
+
+        // evaluar todos los casos de las posiciones en general
+        // primero evaluamos arriba
+        if (!(xArriba < 0)) {
+            //AddEdge(i - 1, j);
+        }
     }
-    
-    public void Prim(Grafo graf, int ancho, int largo)
-    {
-        
+
+    public void AddEdge(Grafo grafo, Vertice fila, Vertice columna) {
+        // primer parametro la ubicacion del primer vertice
+        // segundo parametro la ubicacion en la lista de aristas
+
+        // crear adyacencia (infoAdd, infoSearch) - (infoSearch, infoAdd)
+    }
+
+    public void Prim(Grafo graf, int ancho, int largo) {
         // Primer paso - Agregar vertices a la lista (tantas veces como ancho)        
+        // 
     }
-    
-    
 
-    /*public int numnodos;
+    public void PrintGrafo() {
+        System.out.println(this.cantAristas);
+        System.out.println(this.numVertices);
+        System.out.println("lista de adyacencia");
+        this.listaAdyacencia.printlista();
+        
+        for (int i = 0; i < this.listaAdyacencia.size; i++) {
+            System.out.println(this.listaAdyacencia.size);            
+            Vertice fila = this.listaAdyacencia.buscar(i);
+            System.out.println("fila: " + fila.getId());
+            //System.out.println(this.listaAdyacencia.size);
+            System.out.println("Columnas");
+            fila.getAristas().printlista();
+        }
+    }
+
+
+    /*
+    
+    for (int j = 0; j < fila.getAristas().size - 1; j++) {
+                System.out.println(fila.getAristas().size);
+                Vertice columna = fila.getAristas().buscar(j);
+                System.out.println("columna: " + columna.getId());
+            }
+    
+    
+    public int numnodos;
     public int cantvertices;
     public Lista<Lista> listasAdyacencia;
     
@@ -263,24 +309,15 @@ public class Grafo
     }
         
        
- */
-
+     */
 }
-    
-   
-   
-    
-    
+
 //     public boolean EsVacio(){
 //        return getpEntrada() == null;
 //    }
 //        
-    
-    
-    
-    //metodos del grafo validar si la entrada tiene algo
-    //metodos para validar si la salida tiene algo como booleans if pEntrada
-    
+//metodos del grafo validar si la entrada tiene algo
+//metodos para validar si la salida tiene algo como booleans if pEntrada
 //    public boolean esquina(NodoG aux){
 //       if (aux.pLeft == null && aux.pRight == null || aux.pUp == null && aux.pDown == null){
 //           return true;
@@ -296,7 +333,6 @@ public class Grafo
 ////    
 //    //esquina Esquina(Nodo aux) if aux.pLeft== null & & aux.right == null ó(dos rayitas) se hace lo mimso con pUp y pdown  hacerlo con todas las condiciones posibles, son 4 
 ///       return true else false
-    
 //    public boolean EsAdyacente(NodoG aux){
 //        if (aux.pDown == pEntrada || aux.pLeft == pEntrada || aux.pDown == pEntrada || aux.pUp == pEntrada){
 //            return true;
@@ -307,11 +343,8 @@ public class Grafo
 //    
 //    
 //    //para la salida, esADyacente(Nodo aux) if aux.left ==pentrada o aux.right==pentrada o aux.up==pentrada, con down igual si es verdad return true else false
-    
-    
-    //metodo generar(m,n) nodo aux g nos sirve para delimitar inicializar i y j=0 arriba for i<m y for j<n i++ y j++ if(j=0) {aux.gpup== null aux.gpleft==null y lo demas apuntaria al siguiente aux2=Nodo al nodo que creamos auxG, en la siguiente corrida aumentara el i; auxg.pright==aux2 if(i=n)pright==null; i=0
-    //if(j>0){auxg pLetf==null pFila1==pFirst y la lista 2 la cremaos en el metodo de generar que se tomara en cuenta la primitiva de la lista se debe hacer la lista HACER CLASE DE LISTA DOBLEMENTE ENLAZADA que tendra lista1 y lista2
-    
+//metodo generar(m,n) nodo aux g nos sirve para delimitar inicializar i y j=0 arriba for i<m y for j<n i++ y j++ if(j=0) {aux.gpup== null aux.gpleft==null y lo demas apuntaria al siguiente aux2=Nodo al nodo que creamos auxG, en la siguiente corrida aumentara el i; auxg.pright==aux2 if(i=n)pright==null; i=0
+//if(j>0){auxg pLetf==null pFila1==pFirst y la lista 2 la cremaos en el metodo de generar que se tomara en cuenta la primitiva de la lista se debe hacer la lista HACER CLASE DE LISTA DOBLEMENTE ENLAZADA que tendra lista1 y lista2
 //    public void generar(m,n){
 //        int j=0;
 //        int i=0;
@@ -329,11 +362,8 @@ public class Grafo
 //            i++;
 //        }
 //    }
-    //otro metodo Generar entrada y salida i=0 o n  j=0 ó m genere numero random con libreria map random o random y alli llamaremos otro metodo llamado generar borde Generar borde() i=0; i=n o j=m if(hayentrada metodo nodo n=0 creamos arriba del for el nodo auxiliar else if(hay salida) n=1 suponiendo que n no es un objeto MODIFICAR EN STATE else n=2 si no es entrada ni salida 
-    
-    //INTERFAZ SE RECORRE LA MATRIZ Y YA
-       
-
+//otro metodo Generar entrada y salida i=0 o n  j=0 ó m genere numero random con libreria map random o random y alli llamaremos otro metodo llamado generar borde Generar borde() i=0; i=n o j=m if(hayentrada metodo nodo n=0 creamos arriba del for el nodo auxiliar else if(hay salida) n=1 suponiendo que n no es un objeto MODIFICAR EN STATE else n=2 si no es entrada ni salida 
+//INTERFAZ SE RECORRE LA MATRIZ Y YA
 //    
 //    private int[][] Adyacentes;
 //    private Object[]Informacion;
@@ -414,6 +444,7 @@ public class Grafo
 //    }
 //}
     
+
 
 
 

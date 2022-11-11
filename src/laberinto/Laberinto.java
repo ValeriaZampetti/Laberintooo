@@ -4,7 +4,7 @@
  */
 package laberinto;
 import EstructurasDeDatos.Lista;
-//import EstructurasDeDatos.Grafo;
+import EstructurasDeDatos.Grafo;
 //import EstructurasDeDatos.Prim;
 //import Interfaces.InterfazPrincipal;
 //
@@ -19,21 +19,13 @@ public class Laberinto {
      */
     public static void main(String[] args) {
          //window.setVisible(true);
-        
-      
-        // TODO code application logic here
-        
-         //Grafo grafo = Prim.genLaberinto(10, 10);
+
          
-         var list = new Lista<String>();
+         Grafo graph = new Grafo(4, 4);
          
-         list.insertarPrimero("a");
-         list.insertarPrimero("b");
-         list.insertarPrimero("c");
-         list.insertarPrimero("d");
-         list.insertarPrimero("e");
+         graph.Load();
          
-         list.printlista();
+         graph.PrintGrafo();
          
     }
     

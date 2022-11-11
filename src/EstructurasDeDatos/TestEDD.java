@@ -7,13 +7,14 @@ package EstructurasDeDatos;
 
 /**
  *
- * @author Miguel Abdallah
+ * @author Valeria Zampetti
  */
 public class TestEDD {
 
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) 
     {
         var list = new Lista<String>();

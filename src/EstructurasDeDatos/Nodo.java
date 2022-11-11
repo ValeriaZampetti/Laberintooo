@@ -11,9 +11,9 @@ package EstructurasDeDatos;
  */
 public class Nodo<T> 
 {
-    private Nodo<T> pNext;
+   private Nodo<T> pNext;
     private Nodo<T> pLast;
-    private Object info;
+    private Vertice info;
     
     public Nodo() 
     {
@@ -21,12 +21,12 @@ public class Nodo<T>
         this.pLast = null;
     }
     
-    public Nodo(Object info) 
+    public Nodo(Vertice info) 
     {
         this.pNext = null;
         this.pLast = null;
         this.info = info;
-    }  
+    }
      
      /**
      * @return the pNext
@@ -51,12 +51,12 @@ public class Nodo<T>
     /**
      * @return the info
      */
-    public Object getInfo() { return info; }
+    public Vertice getInfo() { return info; }
 
     /**
      * @param info the info to set
      */
-    public void setInfo(int info) { this.info = info; }    
+    public void setInfo(Vertice info) { this.info = info; }    
 }
 
 

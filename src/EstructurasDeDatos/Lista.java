@@ -22,7 +22,7 @@ public class Lista<T>{
     }
     
     //Método para agregar primer elemento a la lista
-    public void insertarPrimero(Object info) 
+    public void insertarPrimero(Vertice info) 
     {
         Nodo nuevo = new Nodo(info);       
         nuevo.setpNext(pInicio);
@@ -31,7 +31,7 @@ public class Lista<T>{
     }
 
     //Método para insertar de ultimo
-    public void insertarUltimo(Object info) 
+    public void insertarUltimo(Vertice info) 
     {
         Nodo nuevo = new Nodo(info);
         if (pInicio == null) {
@@ -79,7 +79,7 @@ public class Lista<T>{
     }
     */
     
-    public Nodo buscar(Object info)
+    public Nodo buscar(Vertice info)
     {
         Nodo pAux = pInicio;
         while (pAux.getpNext() != null) 
@@ -87,6 +87,20 @@ public class Lista<T>{
             if (pAux.getInfo().equals(info)) 
             {
                 return pAux;
+            }
+            pAux = pAux.getpNext();
+        }        
+        return null;
+    }
+    
+    public Vertice buscar(int id)
+    {
+        Nodo pAux = pInicio;
+        for (int i = 0; i < this.size; i++) 
+        {
+            if (pAux.getInfo().getId() == id) 
+            {
+                return pAux.getInfo();
             }
             pAux = pAux.getpNext();
         }        
@@ -183,7 +197,7 @@ public class Lista<T>{
 
         while (aux != null) 
         {
-            System.out.println("nodo --> "+ aux.getInfo().toString() + ", ");
+            System.out.println("nodo --> "+ aux.getInfo().getId() + ", ");
             aux = aux.getpNext();
         }        
     }
