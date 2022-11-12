@@ -1,9 +1,7 @@
 package EstructurasDeDatos;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+import java.util.Random;
+
 
 /**
  *
@@ -42,11 +40,11 @@ public class Grafo {
         // (0,0) (i, 0) (0,j) (i,j)        
         // -> // si el vertice esta en un borde y no es esquina tiene 3 muros
         // -> // si el vertice no cumple una de las condiciones anteriores entonces tiene 4 muros
-        if (this.numVertices > 0 && this.cantAristas > 0) {
-            for (int i = 0; i <= numVertices-1; i++) {
+        if (this.getNumVertices() > 0 && this.getCantAristas() > 0) {
+            for (int i = 0; i <= getNumVertices() - 1; i++) {
                 Vertice fila = new Vertice(i);
 
-                for (int j = 0; j <= this.cantAristas-1; j++) {
+                for (int j = 0; j <= this.getCantAristas() - 1; j++) {
                     Vertice columna = new Vertice(j);
 
                     // instancia de muros, inicializa con todos los muros
@@ -56,54 +54,140 @@ public class Grafo {
                     aux.insertarUltimo(columna);
                     fila.setAristas(aux);
                 }
-                
-                this.listaAdyacencia.insertarUltimo(fila);
+
+                this.getListaAdyacencia().insertarUltimo(fila);
             }
         }
 
     }
 
-    public void LoadAdyacencia() {
-        int xArriba, yArriba, xAbajo, yAbajo, xDerecha, yDerecha, xIzquierda, yIzquierda = 0;
-        int i = 0;
-        int j = 0;
-        xArriba = i - 1;
-        yArriba = j;
-        xAbajo = i + 1;
-        yAbajo = j;
-        xDerecha = i;
-        yDerecha = j + 1;
-        xIzquierda = i;
-        yIzquierda = j - 1;
 
-        // evaluar todos los casos de las posiciones en general
-        // primero evaluamos arriba
-        if (!(xArriba < 0)) {
-            //AddEdge(i - 1, j);
+    public void Prim(int ancho, int largo) {
+        //paso 2
+        Grafo graph = new Grafo(ancho, largo);
+
+        graph.Load();
+
+        //paso 3
+        // ==> Seleccionar una habitacion inicial
+        int coordX = RandomNumber(largo);
+        int coordY = RandomNumber(ancho);
+
+        while (ExisteVertivesNoRecorridos(graph)) {
+            Vertice fila = this.getListaAdyacencia().buscar(coordY);
+            Vertice casilla = fila.getAristas().buscar(coordX);
+
+            if (!casilla.isRecorrido()) {
+
+                casilla.setRecorrido(true);
+                // paso 4coordX
+                BuscarAdyacentes(graph, casilla.getId(), fila.getId());
+            }
         }
+        
+        // retornar un grafo
     }
-
-    public void AddEdge(Grafo grafo, Vertice fila, Vertice columna) {
-        // primer parametro la ubicacion del primer vertice
-        // segundo parametro la ubicacion en la lista de aristas
-
-        // crear adyacencia (infoAdd, infoSearch) - (infoSearch, infoAdd)
+    
+    public boolean ExisteVertivesNoRecorridos(Grafo graph) 
+    {
+        //recorrer el grafo y ver si todos los vertices estan recorridos
+        //retorna true si existen 
+        // retorna false si no hay
+        return true;
     }
+    
+    
+    public void BuscarAdyacentes(Grafo graph, int coordX, int coordY) {
+        // buscar y guardar sus vertices adyacentes
+        //Lista<Vertice> VerticesAdyacentes = new Lista();
+        Vertice casillaActual = graph.getListaAdyacencia().buscar(coordY).getAristas().buscar(coordX);
 
-    public void Prim(Grafo graf, int ancho, int largo) {
-        // Primer paso - Agregar vertices a la lista (tantas veces como ancho)        
-        // 
+        int iRandom = RandomNumber(4);
+
+        switch (iRandom) {
+            case 0:
+                if (!(coordY - 1 < 0)) {   //existe adyacencia superior
+                    Vertice fila = graph.getListaAdyacencia().buscar(coordY - 1);
+                    Vertice casilla = fila.getAristas().buscar(coordX);
+                    
+                    Muro muroActual = casillaActual.getMuros();
+                    muroActual.setTop(false);
+                    Muro muroAdyacencia = casilla.getMuros();
+                    muroAdyacencia.setBottom(false);
+                    
+                    casillaActual.setMuros(muroActual);
+                    casilla.setMuros(muroAdyacencia);
+                } else {
+                    BuscarAdyacentes(graph, coordX, coordY);
+                }
+                break;
+            case 1:
+                if (!(coordY + 1 > this.numVertices - 1)) {
+                    // existe adyacencia inferior
+                    Vertice fila = graph.getListaAdyacencia().buscar(coordY + 1);
+                    Vertice casilla = fila.getAristas().buscar(coordX);
+
+                    casillaActual.getMuros().setBottom(false);
+                    casilla.getMuros().setTop(false);
+                    //Nodo nodito = new Nodo(casilla);
+                    //VerticesAdyacentes.insertarUltimo(nodito);
+                } else {
+                    BuscarAdyacentes(graph, coordX, coordY);
+                }
+                break;
+            case 2:
+                if (!(coordX - 1 < 0)) {
+                    // existe adyacencia izquierda
+                    Vertice fila = graph.getListaAdyacencia().buscar(coordY);
+                    Vertice casilla = fila.getAristas().buscar(coordX - 1);
+
+                    casillaActual.getMuros().setLeft(false);
+                    casilla.getMuros().setRight(false);
+                    //Nodo nodito = new Nodo(casilla);
+                    //VerticesAdyacentes.insertarUltimo(nodito);
+                } else {
+                    BuscarAdyacentes(graph, coordX, coordY);
+                }
+                break;
+            case 3:
+                if (!(coordX + 1 > this.cantAristas - 1)) {
+                    // adyacencia derecha
+                    Vertice fila = graph.getListaAdyacencia().buscar(coordY);
+                    Vertice casilla = fila.getAristas().buscar(coordX + 1);
+
+                    casillaActual.getMuros().setRight(false);
+                    casilla.getMuros().setLeft(false);
+                    //Nodo nodito = new Nodo(casilla);
+                    //VerticesAdyacentes.insertarUltimo(nodito);
+                } else {
+                    BuscarAdyacentes(graph, coordX, coordY);
+                }
+                break;
+            default:
+                break;
+        }
+        
+        // retornar un grafo
     }
+    
+    
+    public static int RandomNumber(int end) {
+        Random rd = new Random();
+        return rd.nextInt(end);
+    }
+    
+    
+    
 
     public void PrintGrafo() {
-        System.out.println(this.cantAristas);
-        System.out.println(this.numVertices);
+        System.out.println(this.getCantAristas());
+        System.out.println(this.getNumVertices());
         System.out.println("lista de adyacencia");
-        this.listaAdyacencia.printlista();
-        
-        for (int i = 0; i < this.listaAdyacencia.size; i++) {
-            System.out.println(this.listaAdyacencia.size);            
-            Vertice fila = this.listaAdyacencia.buscar(i);
+        this.getListaAdyacencia().printlista();
+
+        for (int i = 0; i < this.getListaAdyacencia().getSize(); i++) {
+//            System.out.println(this.getListaAdyacencia().getSize());
+            Vertice fila = this.getListaAdyacencia().buscar(i);
             System.out.println("fila: " + fila.getId());
             //System.out.println(this.listaAdyacencia.size);
             System.out.println("Columnas");
@@ -310,6 +394,48 @@ public class Grafo {
         
        
      */
+
+    /**
+     * @return the listaAdyacencia
+     */
+    public Lista<Vertice> getListaAdyacencia() {
+        return listaAdyacencia;
+    }
+
+    /**
+     * @param listaAdyacencia the listaAdyacencia to set
+     */
+    public void setListaAdyacencia(Lista<Vertice> listaAdyacencia) {
+        this.listaAdyacencia = listaAdyacencia;
+    }
+
+    /**
+     * @return the numVertices
+     */
+    public int getNumVertices() {
+        return numVertices;
+    }
+
+    /**
+     * @param numVertices the numVertices to set
+     */
+    public void setNumVertices(int numVertices) {
+        this.numVertices = numVertices;
+    }
+
+    /**
+     * @return the cantAristas
+     */
+    public int getCantAristas() {
+        return cantAristas;
+    }
+
+    /**
+     * @param cantAristas the cantAristas to set
+     */
+    public void setCantAristas(int cantAristas) {
+        this.cantAristas = cantAristas;
+    }
 }
 
 //     public boolean EsVacio(){
@@ -443,14 +569,4 @@ public class Grafo {
 //        
 //    }
 //}
-    
-
-
-
-
-    
-    
-
-    
-    
 

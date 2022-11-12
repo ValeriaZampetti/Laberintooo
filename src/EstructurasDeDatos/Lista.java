@@ -11,9 +11,9 @@ package EstructurasDeDatos;
  */
 public class Lista<T>{
     
-    public Nodo<T> pInicio;
+    private Nodo<T> pInicio;
     //public Nodo<T> pFinal;
-    public int size;
+    private int size;
 
     public Lista()
     {
@@ -25,42 +25,42 @@ public class Lista<T>{
     public void insertarPrimero(Vertice info) 
     {
         Nodo nuevo = new Nodo(info);       
-        nuevo.setpNext(pInicio);
-        pInicio = nuevo;
-        size++;
+        nuevo.setpNext(getpInicio());
+        setpInicio((Nodo<T>) nuevo);
+        setSize(getSize() + 1);
     }
 
     //Método para insertar de ultimo
     public void insertarUltimo(Vertice info) 
     {
         Nodo nuevo = new Nodo(info);
-        if (pInicio == null) {
-            pInicio = nuevo;
+        if (getpInicio() == null) {
+            setpInicio((Nodo<T>) nuevo);
         } else {
-            Nodo temp = pInicio;
+            Nodo temp = getpInicio();
             while (temp.getpNext() != null) {
                 temp = temp.getpNext();
             }
             temp.setpNext(nuevo);
         }
-        size++;
+        setSize(getSize() + 1);
     }
     
     public void insertarUltimo(Nodo nodito) 
     {
-        if (pInicio == null) 
+        if (getpInicio() == null) 
         {
-            pInicio = nodito;
+            setpInicio((Nodo<T>) nodito);
         } else 
         {
-            Nodo temp = pInicio;
+            Nodo temp = getpInicio();
             while (temp.getpNext() != null) 
             {
                 temp = temp.getpNext();
             }
             temp.setpNext(nodito);
         }
-        size++;
+        setSize(getSize() + 1);
     }
     
    /* public void insertarUltimo(int[] posicion, int count) 
@@ -81,7 +81,7 @@ public class Lista<T>{
     
     public Nodo buscar(Vertice info)
     {
-        Nodo pAux = pInicio;
+        Nodo pAux = getpInicio();
         while (pAux.getpNext() != null) 
         {            
             if (pAux.getInfo().equals(info)) 
@@ -95,8 +95,8 @@ public class Lista<T>{
     
     public Vertice buscar(int id)
     {
-        Nodo pAux = pInicio;
-        for (int i = 0; i < this.size; i++) 
+        Nodo pAux = getpInicio();
+        for (int i = 0; i < this.getSize(); i++) 
         {
             if (pAux.getInfo().getId() == id) 
             {
@@ -122,12 +122,12 @@ public class Lista<T>{
     public void borrarFirst() 
     {
         
-        if (pInicio != null) 
+        if (getpInicio() != null) 
         {
-            Nodo aux = pInicio;
-            pInicio = pInicio.getpNext();
+            Nodo aux = getpInicio();
+            setpInicio(getpInicio().getpNext());
             aux.setpNext(null);
-            size--;
+            setSize(getSize() - 1);
         }
     }
    
@@ -157,9 +157,9 @@ public class Lista<T>{
     //Método para eliminar un elemento cualquiera
     public void eliminarElemen(Nodo n) 
     {
-        if (pInicio != null) 
+        if (getpInicio() != null) 
         {
-            Nodo pAux = pInicio;
+            Nodo pAux = getpInicio();
             
             while(pAux.getInfo() != n.getInfo())
             {
@@ -175,14 +175,14 @@ public class Lista<T>{
                 sig.setpLast(ant);
                 pAux.setpLast(null);
                 pAux.setpNext(null);
-                size--;
+                setSize(getSize() - 1);
             } 
             else if (sig == null && ant != null) 
             {
                 Nodo aux = ant.getpLast();
                 aux.setpNext(null);                
                 ant.setpLast(null);
-                size--;
+                setSize(getSize() - 1);
             } 
             else if (sig != null && ant == null)
             {
@@ -193,13 +193,41 @@ public class Lista<T>{
     
     public void printlista()
     {        
-        Nodo aux = this.pInicio;
+        Nodo aux = this.getpInicio();
 
         while (aux != null) 
         {
             System.out.println("nodo --> "+ aux.getInfo().getId() + ", ");
             aux = aux.getpNext();
         }        
+    }
+
+    /**
+     * @return the pInicio
+     */
+    public Nodo<T> getpInicio() {
+        return pInicio;
+    }
+
+    /**
+     * @param pInicio the pInicio to set
+     */
+    public void setpInicio(Nodo<T> pInicio) {
+        this.pInicio = pInicio;
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
     
          

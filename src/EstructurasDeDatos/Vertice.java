@@ -14,16 +14,22 @@ public class Vertice<T>
     private Lista<T> aristas; // columnas
     private Muro muros; // muros de cada casilla del laberinto
     private int id;
+    private boolean recorrido; // false = casilla sin recorrer | true = casilla recorrida
     
     public Vertice()
     {
         this.aristas = new Lista();
+        this.id = 0;
+        this.muros = new Muro();
+        this.recorrido = false;
     }
     
     public Vertice(int id)
     {
         this.id = id;
         this.aristas = new Lista();
+        this.muros = new Muro();
+        this.recorrido = false;
     }
 
     /**
@@ -66,6 +72,20 @@ public class Vertice<T>
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the recorrido
+     */
+    public boolean isRecorrido() {
+        return recorrido;
+    }
+
+    /**
+     * @param recorrido the recorrido to set
+     */
+    public void setRecorrido(boolean recorrido) {
+        this.recorrido = recorrido;
     }
     
     

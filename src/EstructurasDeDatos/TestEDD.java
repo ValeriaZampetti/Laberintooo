@@ -19,13 +19,13 @@ public class TestEDD {
     {
         var list = new Lista<String>();
          
-         list.insertarPrimero("a");
-         list.insertarPrimero("b");
-         list.insertarPrimero("c");
-         list.insertarPrimero("d");
-         list.insertarPrimero("e");
+//         list.insertarPrimero("a");
+//         list.insertarPrimero("b");
+//         list.insertarPrimero("c");
+//         list.insertarPrimero("d");
+//         list.insertarPrimero("e");
          
-         list.printlista();
+//         list.printlista();
     }
     
 }
