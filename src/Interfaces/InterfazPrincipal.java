@@ -4,20 +4,25 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author valeriazampetti
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
 
-    Interfaz2 ventana= new Interfaz2();
-    
-    
+    Interfaz2 ventana = new Interfaz2();
+
+    Validaciones validacion = new Validaciones();
+
     /**
      * Creates new form InterfazPrincipal
      */
     public InterfazPrincipal() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -34,8 +39,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        input1ancho = new javax.swing.JTextField();
-        input2largo = new javax.swing.JTextField();
+        ancho = new javax.swing.JTextField();
+        largo = new javax.swing.JTextField();
         BotonVentana = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,13 +60,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel4.setText("Largo:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 50, 20));
 
-        input1ancho.addActionListener(new java.awt.event.ActionListener() {
+        ancho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                input1anchoActionPerformed(evt);
+                anchoActionPerformed(evt);
             }
         });
-        jPanel1.add(input1ancho, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 170, -1));
-        jPanel1.add(input2largo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 180, -1));
+        jPanel1.add(ancho, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 170, -1));
+        jPanel1.add(largo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 180, -1));
 
         BotonVentana.setText("Generar Laberinto");
         BotonVentana.addActionListener(new java.awt.event.ActionListener() {
@@ -77,15 +82,23 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVentanaActionPerformed
-        //ventana.laberinto = Prim.genLaberinto(Integer.parseInt(input1ancho.getText()),
-                //Integer.parseInt(input1ancho.getText()));
-        //ventana.show();
-        
+        if (ancho.getText().isEmpty() || largo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Es obligatorio llenar todos los campos");
+        } else {
+            if (!validacion.isNumericInt(ancho.getText()) || !validacion.isNumericInt(largo.getText())) {
+                JOptionPane.showMessageDialog(null, "Los campos deben llevar unicamente numeros enteros!");
+            }else{
+                // Aqui todo lo demas para graficar el laberinto
+            
+            }
+
+        }
+
     }//GEN-LAST:event_BotonVentanaActionPerformed
 
-    private void input1anchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input1anchoActionPerformed
+    private void anchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_input1anchoActionPerformed
+    }//GEN-LAST:event_anchoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,12 +137,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonVentana;
-    private javax.swing.JTextField input1ancho;
-    private javax.swing.JTextField input2largo;
+    private javax.swing.JTextField ancho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField largo;
     // End of variables declaration//GEN-END:variables
 }

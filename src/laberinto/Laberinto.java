@@ -6,7 +6,7 @@ package laberinto;
 import EstructurasDeDatos.Lista;
 import EstructurasDeDatos.Grafo;
 //import EstructurasDeDatos.Prim;
-//import Interfaces.InterfazPrincipal;
+import Interfaces.InterfazPrincipal;
 //
 // *
 // * @author valeriazampetti
@@ -18,7 +18,9 @@ public class Laberinto {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         //window.setVisible(true);
+         
+//        InterfazPrincipal window = new InterfazPrincipal();
+//        window.setVisible(true);
 
          
          Grafo graph = new Grafo(4, 4);
