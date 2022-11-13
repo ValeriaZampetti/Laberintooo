@@ -2,7 +2,6 @@ package EstructurasDeDatos;
 
 import java.util.Random;
 
-
 /**
  *
  * @author valeriazampetti
@@ -61,7 +60,6 @@ public class Grafo {
 
     }
 
-
     public void Prim(int ancho, int largo) {
         //paso 2
         Grafo graph = new Grafo(ancho, largo);
@@ -84,20 +82,18 @@ public class Grafo {
                 BuscarAdyacentes(graph, casilla.getId(), fila.getId());
             }
         }
-        
+
         // retornar un grafo
     }
-    
-    public boolean ExisteVertivesNoRecorridos(Grafo graph) 
-    {
+
+    public boolean ExisteVertivesNoRecorridos(Grafo graph) {
         //recorrer el grafo y ver si todos los vertices estan recorridos
         //retorna true si existen 
         // retorna false si no hay
         return true;
     }
-    
-    
-    public void BuscarAdyacentes(Grafo graph, int coordX, int coordY) {
+
+    public Grafo BuscarAdyacentes(Grafo graph, int coordX, int coordY) {
         // buscar y guardar sus vertices adyacentes
         //Lista<Vertice> VerticesAdyacentes = new Lista();
         Vertice casillaActual = graph.getListaAdyacencia().buscar(coordY).getAristas().buscar(coordX);
@@ -109,12 +105,12 @@ public class Grafo {
                 if (!(coordY - 1 < 0)) {   //existe adyacencia superior
                     Vertice fila = graph.getListaAdyacencia().buscar(coordY - 1);
                     Vertice casilla = fila.getAristas().buscar(coordX);
-                    
+
                     Muro muroActual = casillaActual.getMuros();
                     muroActual.setTop(false);
                     Muro muroAdyacencia = casilla.getMuros();
                     muroAdyacencia.setBottom(false);
-                    
+
                     casillaActual.setMuros(muroActual);
                     casilla.setMuros(muroAdyacencia);
                 } else {
@@ -127,10 +123,14 @@ public class Grafo {
                     Vertice fila = graph.getListaAdyacencia().buscar(coordY + 1);
                     Vertice casilla = fila.getAristas().buscar(coordX);
 
-                    casillaActual.getMuros().setBottom(false);
-                    casilla.getMuros().setTop(false);
-                    //Nodo nodito = new Nodo(casilla);
-                    //VerticesAdyacentes.insertarUltimo(nodito);
+                    Muro muroActual = casillaActual.getMuros();
+                    muroActual.setBottom(false);
+                    Muro muroAdyacencia = casilla.getMuros();
+                    muroAdyacencia.setTop(false);
+
+                    casillaActual.setMuros(muroActual);
+                    casilla.setMuros(muroAdyacencia);
+
                 } else {
                     BuscarAdyacentes(graph, coordX, coordY);
                 }
@@ -141,10 +141,14 @@ public class Grafo {
                     Vertice fila = graph.getListaAdyacencia().buscar(coordY);
                     Vertice casilla = fila.getAristas().buscar(coordX - 1);
 
-                    casillaActual.getMuros().setLeft(false);
-                    casilla.getMuros().setRight(false);
-                    //Nodo nodito = new Nodo(casilla);
-                    //VerticesAdyacentes.insertarUltimo(nodito);
+                    Muro muroActual = casillaActual.getMuros();
+                    muroActual.setLeft(false);
+                    Muro muroAdyacencia = casilla.getMuros();
+                    muroAdyacencia.setRight(false);
+                    
+                    casillaActual.setMuros(muroActual);
+                    casilla.setMuros(muroAdyacencia);
+
                 } else {
                     BuscarAdyacentes(graph, coordX, coordY);
                 }
@@ -155,10 +159,15 @@ public class Grafo {
                     Vertice fila = graph.getListaAdyacencia().buscar(coordY);
                     Vertice casilla = fila.getAristas().buscar(coordX + 1);
 
-                    casillaActual.getMuros().setRight(false);
-                    casilla.getMuros().setLeft(false);
-                    //Nodo nodito = new Nodo(casilla);
-                    //VerticesAdyacentes.insertarUltimo(nodito);
+                    Muro muroActual = casillaActual.getMuros();
+                    muroActual.setRight(false);
+                    Muro muroAdyacencia = casilla.getMuros();
+                    muroAdyacencia.setLeft(false);
+                    
+                    casillaActual.setMuros(muroActual);
+                    casilla.setMuros(muroAdyacencia);
+
+
                 } else {
                     BuscarAdyacentes(graph, coordX, coordY);
                 }
@@ -166,18 +175,14 @@ public class Grafo {
             default:
                 break;
         }
-        
-        // retornar un grafo
+
+        return graph; // retornar un grafo
     }
-    
-    
+
     public static int RandomNumber(int end) {
         Random rd = new Random();
         return rd.nextInt(end);
     }
-    
-    
-    
 
     public void PrintGrafo() {
         System.out.println(this.getCantAristas());
@@ -394,7 +399,6 @@ public class Grafo {
         
        
      */
-
     /**
      * @return the listaAdyacencia
      */
