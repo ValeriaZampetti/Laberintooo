@@ -60,7 +60,7 @@ public class Grafo {
 
     }
 
-    public void Prim(int ancho, int largo) {
+    public Grafo Prim(int ancho, int largo) {
         //paso 2
         Grafo graph = new Grafo(ancho, largo);
 
@@ -83,7 +83,7 @@ public class Grafo {
             }
         }
 
-        // retornar un grafo
+        return graph; // retornar un grafo
     }
 
     public boolean ExisteVertivesNoRecorridos(Grafo graph) {
@@ -185,10 +185,10 @@ public class Grafo {
     }
 
     public void PrintGrafo() {
-        System.out.println(this.getCantAristas());
-        System.out.println(this.getNumVertices());
-        System.out.println("lista de adyacencia");
-        this.getListaAdyacencia().printlista();
+//        System.out.println(this.getCantAristas());
+//        System.out.println(this.getNumVertices());
+//        System.out.println("lista de adyacencia");
+//        this.getListaAdyacencia().printlista();
 
         for (int i = 0; i < this.getListaAdyacencia().getSize(); i++) {
 //            System.out.println(this.getListaAdyacencia().getSize());

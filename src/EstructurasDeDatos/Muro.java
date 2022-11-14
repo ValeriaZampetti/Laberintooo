@@ -13,7 +13,7 @@ public class Muro {
     private boolean top;
     private boolean right;
     private boolean bottom;
-    //private boolean visited;
+//    private boolean visited;
     
     public Muro()
     {

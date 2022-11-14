@@ -89,6 +89,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Los campos deben llevar unicamente numeros enteros!");
             }else{
                 // Aqui todo lo demas para graficar el laberinto
+                
+                // O tambien aqui interfaz2
             
             }
 

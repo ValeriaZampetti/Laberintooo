@@ -25,7 +25,7 @@ public class Vertice<T>
     }
     
     public Vertice(int id)
-    {
+    {       
         this.id = id;
         this.aristas = new Lista();
         this.muros = new Muro();
