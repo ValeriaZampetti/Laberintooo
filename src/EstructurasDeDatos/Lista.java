@@ -1,8 +1,4 @@
 package EstructurasDeDatos;
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
 /**
  *
@@ -63,21 +59,6 @@ public class Lista<T>{
         setSize(getSize() + 1);
     }
     
-   /* public void insertarUltimo(int[] posicion, int count) 
-    {
-        Nodo nuevo = new Nodo(posicion, count);
-        if (pInicio == null) {
-            pInicio = nuevo;
-        } else {
-            Nodo temp = pInicio;
-            while (temp.pNext != null) {
-                temp = temp.pNext;
-            }
-            temp.pNext = nuevo;
-        }
-        size++;
-    }
-    */
     
     public Nodo buscar(Vertice info)
     {
@@ -107,16 +88,6 @@ public class Lista<T>{
         return null;
     }
     
-    /*public Nodo buscarCount(int posicion)
-    {
-        Nodo pAux = pInicio;
-        for (int i = 0; i < size; i++) 
-        {
-            pAux = pAux.getpNext();
-        }
-        
-        return pAux;
-    }*/
     
     //Método para eliminar el primer elemento
     public void borrarFirst() 
@@ -132,26 +103,6 @@ public class Lista<T>{
     }
    
     
-    //Método para eliminar el ultimo
-    /*public void borrarLast() 
-    {
-        if (pInicio != null) 
-        {
-            if (pInicio.getpNext() == null) 
-            {
-                pInicio = null;
-            } 
-            else 
-            {
-                Nodo temp = pInicio;
-                while (temp.getpNext() != null) 
-                {
-                    temp = temp.getpNext();
-                }
-                temp.pNext = null;
-            }
-        }
-    }*/
     
     
     //Método para eliminar un elemento cualquiera

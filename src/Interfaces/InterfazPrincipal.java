@@ -4,15 +4,22 @@
  */
 package Interfaces;
 
+import EstructurasDeDatos.AppDemo;
+import static EstructurasDeDatos.AppDemo.setUp;
+import EstructurasDeDatos.Grafo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javafx.application.Application.launch;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author valeriazampetti
+ * 
+ * //CORRER EL PROYECTO DANDOLE CLICK DERECHO A LA INTERFAZ LLAMADA "InterfazPrincipal.java" Y DARLE A "RUN FILE"
  */
 public class InterfazPrincipal extends javax.swing.JFrame {
-
-    Interfaz2 ventana = new Interfaz2();
 
     Validaciones validacion = new Validaciones();
 
@@ -82,16 +89,29 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonVentanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonVentanaActionPerformed
+
+
         if (ancho.getText().isEmpty() || largo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Es obligatorio llenar todos los campos");
         } else {
             if (!validacion.isNumericInt(ancho.getText()) || !validacion.isNumericInt(largo.getText())) {
                 JOptionPane.showMessageDialog(null, "Los campos deben llevar unicamente numeros enteros!");
-            }else{
-                // Aqui todo lo demas para graficar el laberinto
+            } else {
+
                 
-                // O tambien aqui interfaz2
-            
+                AppDemo.width = Integer.parseInt(ancho.getText());
+                AppDemo.length = Integer.parseInt(largo.getText());
+
+                Grafo aux = new Grafo(Integer.parseInt(ancho.getText()), Integer.parseInt(largo.getText()));
+                aux.Load();
+
+                AppDemo.setUp = aux;
+
+                AppDemo.main();
+                
+                ancho.setText("");
+                largo.setText("");
+
             }
 
         }
